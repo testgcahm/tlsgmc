@@ -54,10 +54,11 @@ export default async function EventsPage() {
     }
 
     const data = await res.json();
-    const events: EventData[] = data.eventsArray;
+    const events: EventData[] = data.eventsArray || [];
     return <EventsClient events={events} />;
   } catch (error) {
     console.error("Error fetching events:", error);
+    // Return empty events array instead of failing the build
     return <EventsClient events={[]} />;
   }
 }

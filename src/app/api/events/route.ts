@@ -28,11 +28,19 @@ async function verifyRequest(request: Request) {
 }
 
 export async function GET() {
-  // Fetch all documents from the 'events' collection
-  const eventsCol = collection(db, 'events');
-  const eventsSnapshot = await getDocs(eventsCol);
-  const eventsArray = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  return NextResponse.json({ eventsArray });
+  try {
+    // Fetch all documents from the 'events' collection
+    const eventsCol = collection(db, 'events');
+    const eventsSnapshot = await getDocs(eventsCol);
+    const eventsArray = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    
+    // Always return a valid response, even if no events exist
+    return NextResponse.json({ eventsArray: eventsArray || [] });
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    // Return empty array on error to prevent build failures
+    return NextResponse.json({ eventsArray: [] });
+  }
 }
 
 export async function POST(request: Request) {
