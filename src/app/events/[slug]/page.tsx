@@ -12,10 +12,12 @@ async function fetchEvents(): Promise<EventData[]> {
     const res = await fetch(apiUrl, { cache: 'force-cache' });
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch events: ${res.status}`);
+      console.warn(`Failed to fetch events: ${res.status}`);
+      return [];
     }
     const data = await res.json();
-    return data.eventsArray ?? [];
+    const events = data.eventsArray ?? [];
+    return Array.isArray(events) ? events : [];
   } catch (error) {
     console.error('Error fetching events:', error);
     return [];
@@ -72,8 +74,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 // Static paths generation
 export async function generateStaticParams() {
-  const events = await fetchEvents();
-  return events.map((e: EventData) => ({ slug: e.slug }));
+  try {
+    const events = await fetchEvents();
+    if (!Array.isArray(events) || events.length === 0) {
+      return [];
+    }
+    return events.map((e: EventData) => ({ slug: e.slug }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
 // Page component
