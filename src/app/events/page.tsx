@@ -44,16 +44,18 @@ export const metadata: Metadata = {
 // Page component
 export default async function EventsPage() {
   try {
-    const apiUrl = `${baseUrl}api/events`
+    // const apiUrl = `${baseUrl}api/events`
 
-    // Use fetch with force-cache to enable static generation at build time
-    const res = await fetch(apiUrl, { cache: 'force-cache' });
+    // // Use fetch with force-cache to enable static generation at build time
+    // const res = await fetch(apiUrl, { cache: 'force-cache' });
     
-    if (!res.ok) {
-      throw new Error(`Failed to fetch events: ${res.status}`);
-    }
+    // if (!res.ok) {
+    //   throw new Error(`Failed to fetch events: ${res.status}`);
+    // }
 
-    const data = await res.json();
+    // const data = await res.json();
+    const data = {
+      "eventsArray": []}
     const events: EventData[] = data.eventsArray;
     return <EventsClient events={events} />;
   } catch (error) {
