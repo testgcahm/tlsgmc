@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { EmailIcon, PhoneIcon, FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components/footer/FooterIcons';
+import { EmailIcon, PhoneIcon, FacebookIcon, InstagramIcon } from '@/components/footer/FooterIcons';
 import { Copy, Send, User, Mail, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useInView from '@/components/useInView';
@@ -187,20 +187,12 @@ const ContactClient: React.FC = () => {
                                         <FacebookIcon />
                                     </a>
                                     <a
-                                        href="https://www.instagram.com/takhayul_literary_society_gmc/"
+                                        href="https://www.instagram.com/takhayul_lsgmc?igsh=MWdscHo5ZGd3eHd4eQ=="
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-10 h-10 hover:scale-110 bg-accent border-2 border-[#5d0505] rounded-full flex items-center justify-center hover:bg-accent-light text-white hover:shadow-lg transition-all duration-300 group"
                                     >
                                         <InstagramIcon />
-                                    </a>
-                                    <a
-                                        href="https://whatsapp.com/channel/0029Vb9V8EWLNSa2uew73k28"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-10 h-10 hover:scale-110 bg-accent border-2 border-[#5d0505] rounded-full flex items-center justify-center hover:bg-accent-light text-white hover:shadow-lg transition-all duration-300 group"
-                                    >
-                                        <WhatsAppIcon />
                                     </a>
                                 </div>
                             </div>

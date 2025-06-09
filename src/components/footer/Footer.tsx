@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { EmailIcon, FacebookIcon, InstagramIcon, LocationIcon, PhoneIcon, WhatsAppIcon } from './FooterIcons';
+import { EmailIcon, FacebookIcon, InstagramIcon, LocationIcon, PhoneIcon } from './FooterIcons';
 import { Copy } from 'lucide-react';
 import React, { useState } from 'react';
 import { email, phoneNumber, spaceInNumber } from '../utils';
@@ -57,8 +57,7 @@ const Footer = () => {
                         
                         <div className="flex space-x-3 mt-4">
                             <SocialIcon href="https://m.facebook.com/1193024860863894/" icon="facebook" />
-                            <SocialIcon href="https://www.instagram.com/takhayul_literary_society_gmc/" icon="instagram" />
-                            <SocialIcon href="https://whatsapp.com/channel/0029Vb9V8EWLNSa2uew73k28" icon="whatsapp" />
+                            <SocialIcon href="https://www.instagram.com/takhayul_lsgmc?igsh=MWdscHo5ZGd3eHd4eQ==" icon="instagram" />
                         </div>
                     </div>
 
@@ -183,7 +182,6 @@ const SocialIcon = ({ href, icon }: { href: string; icon: string }) => {
         >
             {icon === 'facebook' && <FacebookIcon />}
             {icon === 'instagram' && <InstagramIcon />}
-            {icon === 'whatsapp' && <WhatsAppIcon />}
         </a>
     );
 };
