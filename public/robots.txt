@@ -1,0 +1,6 @@
+# *
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://takhayul-literary-society-gmc.vercel.app/sitemap.xml
