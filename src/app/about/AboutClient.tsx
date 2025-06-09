@@ -1,144 +1,159 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import useInView from '@/components/useInView';
 
 const AboutClient = () => {
-  // Animation refs - each animates only once when it comes into view
+  // Animation refs
   const [heroRef, heroInView] = useInView<HTMLElement>(0.1);
   const [missionRef, missionInView] = useInView<HTMLElement>(0.3);
   const [valuesRef, valuesInView] = useInView<HTMLElement>(0.2);
-  const [achievementsRef, achievementsInView] = useInView<HTMLElement>(0.2);
-  const [ctaRef, ctaInView] = useInView<HTMLElement>(0.3);
-
+  const [teamRef, teamInView] = useInView<HTMLElement>(0.2);
   const coreValues = [
     {
-      icon: "📚",
-      title: "Literary Excellence",
-      description: "Promoting exceptional writing, creativity, and storytelling within the medical community."
+      icon: "✍️",
+      title: "Creative Expression",
+      description: "Nurturing the artistic soul through diverse forms of literary creativity - poetry, prose, storytelling, and more."
     },
     {
       icon: "🤝",
-      title: "Community Building",
-      description: "Creating meaningful connections between writers, readers, and literary enthusiasts."
+      title: "Community Connection",
+      description: "Building bridges between creative minds through shared stories, experiences, and literary exploration."
     },
     {
-      icon: "🏛️",
-      title: "Cultural Heritage",
-      description: "Preserving and celebrating our rich literary traditions while embracing modern expression."
+      icon: "📚",
+      title: "Literary Excellence",
+      description: "Promoting the art of fine writing, poetry, and storytelling while celebrating literary traditions."
     },
     {
-      icon: "🎓",
-      title: "Educational Growth",
-      description: "Fostering intellectual development through workshops, discussions, and creative programs."
+      icon: "🌱",
+      title: "Personal Growth",
+      description: "Fostering self-reflection and emotional intelligence through the transformative power of literature."
     },
     {
-      icon: "💡",
-      title: "Innovation",
-      description: "Encouraging new forms of literary expression and creative approaches to storytelling."
+      icon: "🎭",
+      title: "Artistic Freedom",
+      description: "Providing a platform for creative expression without boundaries, celebrating diverse voices and styles."
     },
     {
       icon: "🌟",
-      title: "Excellence",
-      description: "Maintaining the highest standards in all our literary endeavors and community activities."
+      title: "Literary Heritage",
+      description: "Preserving and promoting the rich tradition of literature while embracing contemporary forms of expression."
     }
-  ];
-
-  const achievements = [
+  ];  
+  
+  const teamMembers = [
     {
-      year: "2024",
-      title: "Literary Excellence Award",
-      description: "Recognized for outstanding contribution to literary culture in medical education",
-      highlight: true
+      name: "Poets & Writers",
+      role: "Creative Artists",
+      description: "Passionate poets and writers sharing their literary masterpieces",
+      image: "/logo.png"
     },
     {
-      year: "2023",
-      title: "Best Society Award",
-      description: "Awarded best literary society by Gujranwala Medical College",
-      highlight: true
-    },
-    {
-      year: "2022",
-      title: "Cultural Impact Recognition",
-      description: "Acknowledged for significant cultural impact in the medical community",
-      highlight: false
-    },
-    {
-      year: "2021",
-      title: "Foundation & Launch",
-      description: "Successfully established as a premier literary society",
-      highlight: false
+      name: "Event Organizers",
+      role: "Program Coordinators",
+      description: "Bringing poetry and literary nights, and creative events to life",
+      image: "/logo.png"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#f8f4f0]">
       {/* Hero Section */}
       <section 
         ref={heroRef}
         className="relative overflow-hidden"
       >
-        <div className="bg-gradient-to-br from-primary via-primary-light to-secondary min-h-[80vh] flex items-center justify-center px-4">
-          <div className={`max-w-5xl mx-auto text-center transform transition-all duration-1000 ${
+        <div className="bg-gradient-to-br from-[#0f0104] via-[#5d0505] to-[#825a56] min-h-[85vh] py-3 flex items-center justify-center px-4">
+          <div className={`max-w-6xl mx-auto text-center transform transition-all duration-1000 ${
             heroInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           }`}>
-            <div className="mb-8">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-neutral mb-6 leading-tight">
-                About Our
-                <span className="block text-gold">Society</span>
+            <div className="mb-12">
+              <div className="flex items-center justify-center mb-8">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full opacity-30 blur-sm bg-white/20"></div>
+                  <Image
+                    src="/logo.png"
+                    alt="Takhayul Literary Society GMC Logo"
+                    width={120}
+                    height={120}
+                    className="relative z-10 rounded-full border-4 shadow-2xl border-white/30"
+                  />
+                </div>
+              </div>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                About
+                <span className="block bg-gradient-to-r from-[#f8f4f0] to-[#e8e0d8] bg-clip-text text-transparent">
+                  Takhayul Literary Society
+                </span>
               </h1>
-              <div className="w-32 h-2 bg-accent mx-auto rounded-full mb-8"></div>
+              <div className="w-32 h-2 bg-[#f8f4f0] mx-auto rounded-full mb-8"></div>
             </div>
-            
-            <p className="text-xl md:text-2xl text-neutral-light max-w-3xl mx-auto leading-relaxed mb-8">
-              The Takhayul Literary Society GMC stands as a beacon of creativity and intellectual discourse, 
-              uniting medicine and literature in unprecedented harmony.
+              <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-12">
+              Where words come alive and creativity flourishes, fostering poetic expression and literary excellence 
+              through the transformative power of literature, poetry, and creative storytelling.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-6 text-neutral-light">
-              <div className="flex items-center gap-2">
-                <span className="text-gold font-bold text-2xl">2021</span>
+            <div className="flex flex-wrap justify-center gap-8 text-white/80">
+              <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                <span className="text-[#f8f4f0] font-bold text-xl">2018</span>
                 <span>Founded</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gold font-bold text-2xl">500+</span>
-                <span>Members</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gold font-bold text-2xl">50+</span>
-                <span>Events</span>
+              <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                <span className="text-[#f8f4f0] font-bold text-xl">GMC</span>
+                <span>Gujranwala Medical College</span>
+              </div>              
+              <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                <span className="text-[#f8f4f0] font-bold text-xl">Creative</span>
+                <span>Community</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission Statement */}
+      {/* Mission & Purpose Section */}
       <section 
         ref={missionRef}
-        className="py-20 px-4 bg-neutral-light"
+        className="py-20 px-4 bg-[#f8f4f0]"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className={`transform transition-all duration-800 ${
             missionInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-bold text-primary mb-6">Our Mission</h2>
-              <div className="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0f0104] mb-6">Our Mission & Purpose</h2>
+              <div className="w-24 h-1 bg-[#5d0505] mx-auto rounded-full"></div>
             </div>
-            
-            <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border-l-8 border-accent">
-              <blockquote className="text-xl md:text-2xl leading-relaxed text-foreground font-medium italic text-center">
-                "To nurture creativity, foster intellectual discourse, and celebrate the profound intersection 
-                of medicine and literature—creating a space where healing meets storytelling, and where 
-                scientific minds discover the transformative power of words."
-              </blockquote>
-              <div className="mt-8 text-center">
-                <div className="inline-flex items-center gap-3 bg-primary text-neutral px-6 py-3 rounded-full">
-                  <span className="text-gold">✦</span>
-                  <span className="font-semibold">Est. 2021</span>
-                  <span className="text-gold">✦</span>
-                </div>
+
+            <div className="grid md:grid-cols-2 gap-12">
+              {/* Mission */}
+              <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 border-l-8 border-[#5d0505] transform transition-all duration-500 hover:shadow-3xl hover:scale-105">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#5d0505] to-[#825a56] rounded-full flex items-center justify-center mr-4">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#0f0104]">Our Mission</h3>
+                </div>                
+                <p className="text-lg text-[#825a56] leading-relaxed">
+                  Empowering creative minds to express, reflect, and connect through the power of literature, poetry, and storytelling, 
+                  enriching both personal and artistic lives.
+                </p>
+              </div>
+
+              {/* Purpose */}
+              <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 border-l-8 border-[#825a56] transform transition-all duration-500 hover:shadow-3xl hover:scale-105">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#825a56] to-[#5d0505] rounded-full flex items-center justify-center mr-4">
+                    <span className="text-2xl text-white">💡</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#0f0104]">Our Purpose</h3>
+                </div>                
+                <p className="text-lg text-[#825a56] leading-relaxed">
+                  Where words meet soul, our literary society celebrates creativity, provides artistic inspiration, and promotes literary excellence among writers and poets. 
+                  Through poetry, creative writing, literary discussions, and artistic exploration, we build a community that nurtures the timeless art of storytelling and verse.
+                </p>
               </div>
             </div>
           </div>
@@ -148,145 +163,84 @@ const AboutClient = () => {
       {/* Core Values */}
       <section 
         ref={valuesRef}
-        className="py-20 px-4 bg-gradient-to-br from-background to-neutral"
+        className="py-20 px-4 bg-gradient-to-br from-[#f8f4f0] to-[#e8e0d8]"
       >
         <div className="max-w-7xl mx-auto">
           <div className={`text-center mb-16 transform transition-all duration-800 ${
             valuesInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
-            <h2 className="text-5xl font-bold text-primary mb-6">Our Core Values</h2>
-            <p className="text-xl text-foreground max-w-3xl mx-auto">
-              The principles that guide our literary community and shape our vision for the future
+            <h2 className="text-4xl md:text-5xl font-bold text-[#0f0104] mb-6">Our Core Values</h2>            <p className="text-xl text-[#825a56] max-w-3xl mx-auto">
+              The principles that guide our literary community and inspire our passion for creative expression
             </p>
-            <div className="w-24 h-1 bg-accent mx-auto rounded-full mt-6"></div>
+            <div className="w-24 h-1 bg-[#5d0505] mx-auto rounded-full mt-6"></div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {coreValues.map((value, index) => (
               <div
                 key={value.title}
-                className={`bg-white rounded-xl shadow-xl p-8 border-t-4 border-accent hover:shadow-2xl transition-all duration-500 transform ${
+                className={`bg-white rounded-xl shadow-xl p-8 border-t-4 border-[#5d0505] hover:shadow-2xl transition-all duration-500 transform ${
                   valuesInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-                } hover:scale-105`}
+                } hover:scale-105 group`}
                 style={{ 
                   transitionDelay: valuesInView ? `${index * 100}ms` : '0ms'
                 }}
               >
-                <div className="text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-2xl font-bold text-primary mb-4">{value.title}</h3>
-                <p className="text-foreground leading-relaxed">{value.description}</p>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#5d0505] to-[#825a56] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">{value.icon}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0f0104] mb-4">{value.title}</h3>
+                  <p className="text-[#825a56] leading-relaxed">{value.description}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Achievements */}
+      {/* Team Section */}
       <section 
-        ref={achievementsRef}
-        className="py-20 px-4 bg-gradient-to-br from-primary to-secondary"
+        ref={teamRef}
+        className="py-20 px-4 bg-gradient-to-br from-[#0f0104] to-[#5d0505]"
       >
         <div className="max-w-6xl mx-auto">
           <div className={`text-center mb-16 transform transition-all duration-800 ${
-            achievementsInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            teamInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
-            <h2 className="text-5xl font-bold text-neutral mb-6">Our Achievements</h2>
-            <p className="text-xl text-neutral-light max-w-3xl mx-auto">
-              Milestones that mark our journey of excellence and community impact
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Community</h2>            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              Meet the passionate poets, writers, and creative minds who make our literary society flourish
             </p>
-            <div className="w-24 h-1 bg-gold mx-auto rounded-full mt-6"></div>
+            <div className="w-24 h-1 bg-[#f8f4f0] mx-auto rounded-full mt-6"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {achievements.map((achievement, index) => (
+          <div className="grid min-[600px]:grid-cols-2 gap-8">
+            {teamMembers.map((member, index) => (
               <div
-                key={achievement.year}
+                key={member.name}
                 className={`group relative overflow-hidden rounded-2xl transform transition-all duration-700 ${
-                  achievementsInView ? 'translate-x-0 opacity-100' : index % 2 === 0 ? '-translate-x-8 opacity-0' : 'translate-x-8 opacity-0'
-                } ${achievement.highlight ? 'bg-gradient-to-br from-gold to-accent' : 'bg-primary-light'}`}
+                  teamInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                } bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20`}
                 style={{ 
-                  transitionDelay: achievementsInView ? `${index * 150}ms` : '0ms'
+                  transitionDelay: teamInView ? `${index * 150}ms` : '0ms'
                 }}
               >
-                <div className="p-8 relative z-10">
-                  <div className={`text-4xl font-black mb-4 ${
-                    achievement.highlight ? 'text-neutral' : 'text-gold'
-                  }`}>
-                    {achievement.year}
+                <div className="p-8 text-center">
+                  <div className="relative mb-6">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={80}
+                      height={80}
+                      className="rounded-full border-4 border-white/30 mx-auto group-hover:scale-110 transition-transform duration-300"
+                    />
                   </div>
-                  <h3 className={`text-2xl font-bold mb-4 ${
-                    achievement.highlight ? 'text-neutral' : 'text-neutral'
-                  }`}>
-                    {achievement.title}
-                  </h3>
-                  <p className={`leading-relaxed ${
-                    achievement.highlight ? 'text-neutral-dark' : 'text-neutral-light'
-                  }`}>
-                    {achievement.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
+                  <p className="text-[#f8f4f0] font-medium mb-3">{member.role}</p>
+                  <p className="text-white/70 text-sm leading-relaxed">{member.description}</p>
                 </div>
-                
-                {achievement.highlight && (
-                  <div className="absolute top-4 right-4">
-                    <div className="w-3 h-3 bg-neutral rounded-full animate-pulse"></div>
-                  </div>
-                )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section 
-        ref={ctaRef}
-        className="py-20 px-4 bg-neutral-light"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <div className={`transform transition-all duration-800 ${
-            ctaInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}>
-            <h2 className="text-5xl font-bold text-primary mb-8">
-              Join Our Literary Family
-            </h2>
-            <p className="text-xl text-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              Become part of a vibrant community where medical minds meet literary souls, 
-              where every voice matters, and where creativity knows no bounds.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="group bg-gradient-to-r from-accent to-accent-light text-neutral px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                <span className="flex items-center gap-3">
-                  Get Involved Today
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-              </button>
-              
-              <button className="group border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-primary hover:text-neutral">
-                <span className="flex items-center gap-3">
-                  Learn More
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-              </button>
-            </div>
-            
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div className="p-6">
-                <div className="text-3xl mb-3">📝</div>
-                <h4 className="font-bold text-primary mb-2">Creative Writing</h4>
-                <p className="text-foreground">Express yourself through poetry, prose, and storytelling</p>
-              </div>
-              <div className="p-6">
-                <div className="text-3xl mb-3">🎭</div>
-                <h4 className="font-bold text-primary mb-2">Literary Events</h4>
-                <p className="text-foreground">Participate in symposiums, workshops, and competitions</p>
-              </div>
-              <div className="p-6">
-                <div className="text-3xl mb-3">🌐</div>
-                <h4 className="font-bold text-primary mb-2">Global Community</h4>
-                <p className="text-foreground">Connect with writers and readers worldwide</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
