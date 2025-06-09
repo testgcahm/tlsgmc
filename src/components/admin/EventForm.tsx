@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { EventData } from "@/components/events/types";
 import SpeakersSection from "./SpeakersSection";
 import SubeventsSection from "./subevents/SubeventsSection";
