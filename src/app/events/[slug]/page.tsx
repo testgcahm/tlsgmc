@@ -6,17 +6,15 @@ import EventDetails from "@/components/events/EventDetails";
 // Helper to fetch events list
 async function fetchEvents(): Promise<EventData[]> {
   try {
-    // const apiUrl = `${baseUrl}api/events`
+    const apiUrl = `${baseUrl}api/events`
 
-    // // Use fetch with force-cache for static generation
-    // const res = await fetch(apiUrl, { cache: 'force-cache' });
+    // Use fetch with force-cache for static generation
+    const res = await fetch(apiUrl, { cache: 'force-cache' });
 
-    // if (!res.ok) {
-    //   throw new Error(`Failed to fetch events: ${res.status}`);
-    // }
-    // const data = await res.json();
-const data = {
-  "eventsArray": []}
+    if (!res.ok) {
+      throw new Error(`Failed to fetch events: ${res.status}`);
+    }
+    const data = await res.json();
     return data.eventsArray ?? [];
   } catch (error) {
     console.error('Error fetching events:', error);

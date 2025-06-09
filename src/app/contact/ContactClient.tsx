@@ -179,7 +179,7 @@ const ContactClient: React.FC = () => {
                                 <p className="text-[#5d0505] font-semibold mb-4">Follow Us</p>
                                 <div className="flex space-x-4">
                                     <a
-                                        href="https://www.facebook.com/people/Takhayul-Literary-Society/100067471032724/"
+                                        href="https://m.facebook.com/1193024860863894/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-10 h-10 hover:scale-110 bg-accent border-2 border-[#5d0505] rounded-full flex items-center justify-center hover:bg-accent-light text-white hover:shadow-lg transition-all duration-300 group"

@@ -56,7 +56,7 @@ const Footer = () => {
                         </p>
                         
                         <div className="flex space-x-3 mt-4">
-                            <SocialIcon href="https://www.facebook.com/people/Takhayul-Literary-Society/100067471032724/" icon="facebook" />
+                            <SocialIcon href="https://m.facebook.com/1193024860863894/" icon="facebook" />
                             <SocialIcon href="https://www.instagram.com/takhayul_literary_society_gmc/" icon="instagram" />
                             <SocialIcon href="https://whatsapp.com/channel/0029Vb9V8EWLNSa2uew73k28" icon="whatsapp" />
                         </div>
