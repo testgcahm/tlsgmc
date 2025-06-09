@@ -124,37 +124,6 @@ export default function EventsClient({ events }: EventsClientProps) {
                   </motion.div>
                 ))}
               </div>
-
-              {/* Call to Action */}
-              <div className="text-center mt-20">
-                <div className="bg-gradient-to-r from-[#0f0104] via-[#5d0505] to-[#825a56] rounded-2xl p-12 shadow-2xl">
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                    Want to Stay Updated?
-                  </h3>
-                  <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-                    Follow us on social media to never miss our literary events, poetry nights,
-                    and creative workshops that inspire and connect our community.
-                  </p>
-                  <div className="flex justify-center space-x-6">
-                    <a
-                      href="https://m.facebook.com/1193024860863894/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 transition-all duration-300 transform hover:scale-110 shadow-lg"
-                    >
-                      <span className="text-2xl">📘</span>
-                    </a>
-                    <a
-                      href="https://www.instagram.com/takhayul_lsgmc?igsh=MWdscHo5ZGd3eHd4eQ=="
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 transition-all duration-300 transform hover:scale-110 shadow-lg"
-                    >
-                      <span className="text-2xl">📷</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
         </div>
