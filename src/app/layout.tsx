@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import { Analytics } from "@vercel/analytics/next";
 // import NotificationPopup from "./NotificationPopup";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { IsOnlineProvider } from "@/components/context/IsOnlineContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +20,12 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
         <Analytics />
-        <SpeedInsights />
-        {/* <NotificationPopup /> */}
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <IsOnlineProvider>
+          {/* <NotificationPopup /> */}
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </IsOnlineProvider>
       </body>
     </html>
   );

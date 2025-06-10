@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { EmailIcon, PhoneIcon, FacebookIcon, InstagramIcon } from '@/components/footer/FooterIcons';
-import { Copy, Send, User, Mail, MessageSquare } from 'lucide-react';
+import { Copy, Send, User, Mail, MessageSquare, TriangleAlert } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useInView from '@/components/useInView';
 import { email, phoneNumber, spaceInNumber } from '@/components/utils';
+import { useIsOnline } from '@/components/context/IsOnlineContext';
 
 const GOOGLE_FORM_URL = process.env.NEXT_PUBLIC_GOOGLE_FORM_CONTACT_URL;
 const ENTRY_NAME = "entry.929348297";
@@ -20,6 +21,8 @@ const ContactClient: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [copied, setCopied] = useState(false);
     const [copiedEmail, setCopiedEmail] = useState(false);
+
+    const isOnline = useIsOnline();
 
     // Animation refs for on-view
     const [infoRef, infoInView] = useInView<HTMLDivElement>(0.2);
@@ -85,10 +88,18 @@ const ContactClient: React.FC = () => {
         if (formSection) {
             formSection.scrollIntoView({ behavior: 'smooth' });
         }
-    };    
-    
+    };
+
     return (
         <section id="contact" className="min-h-screen bg-white px-4 py-8">
+
+            {!isOnline && (
+                <div className="flex justify-center items-center mx-2 text-red-700 bg-red-100 border border-red-300 rounded p-2 w-full mb-6 font-semibold">
+                    <TriangleAlert className="min-w-6 w-6 h-6 min-h-6 text-red-700 mr-2" />
+                    You are Offline. Please check your internet connection.
+                </div>
+            )}
+
             <div className="container mx-auto max-w-7xl">
                 {/* Header Section */}
                 <motion.div
@@ -122,7 +133,7 @@ const ContactClient: React.FC = () => {
                             <p className="text-[#825a56] mb-8 leading-relaxed">
                                 Reach out to us through any of the following channels. We're here to help and would love to connect with you.
                             </p>
-                            
+
                             <div className="space-y-6">
                                 {/* Email */}
                                 <div className="flex items-center group">
@@ -135,8 +146,8 @@ const ContactClient: React.FC = () => {
                                             <a href={`mailto:${email}`} className="text-[#0f0104] hover:text-[#5d0505] transition-colors duration-300 break-all">
                                                 {email}
                                             </a>
-                                            <button 
-                                                onClick={handleCopyEmail} 
+                                            <button
+                                                onClick={handleCopyEmail}
                                                 className="ml-3 text-[#825a56] hover:text-[#5d0505] transition-colors duration-300"
                                                 aria-label="Copy email address"
                                             >
@@ -160,8 +171,8 @@ const ContactClient: React.FC = () => {
                                             <a href={`tel:${phoneNumber}`} className="text-[#0f0104] hover:text-[#5d0505] transition-colors duration-300">
                                                 {spaceInNumber(phoneNumber)}
                                             </a>
-                                            <button 
-                                                onClick={handleCopy} 
+                                            <button
+                                                onClick={handleCopy}
                                                 className="ml-3 text-[#825a56] hover:text-[#5d0505] transition-colors duration-300"
                                                 aria-label="Copy phone number"
                                             >
@@ -173,7 +184,7 @@ const ContactClient: React.FC = () => {
                                         )}
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                             {/* Social Media */}
                             <div className="mt-8 pt-6 border-t border-[#5d0505]/20">
                                 <p className="text-[#5d0505] font-semibold mb-4">Follow Us</p>
@@ -195,6 +206,15 @@ const ContactClient: React.FC = () => {
                                         <InstagramIcon />
                                     </a>
                                 </div>
+                            </div>                            {/* Quick Contact Button */}
+                            <div className="mt-6 pt-4 border-t border-[#5d0505]/20">
+                                <button
+                                    onClick={scrollToContactForm}
+                                    className="w-full bg-[#5d0505] hover:bg-[#0f0104] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                                >
+                                    <Send size={18} />
+                                    Go to Contact Form
+                                </button>
                             </div>
                         </div>
                     </motion.div>
@@ -249,11 +269,10 @@ const ContactClient: React.FC = () => {
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light ${
-                                        errors.name 
-                                            ? 'border-red-500 focus:border-red-500' 
-                                            : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
-                                    }`}
+                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light ${errors.name
+                                        ? 'border-red-500 focus:border-red-500'
+                                        : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
+                                        }`}
                                     placeholder="Enter your full name"
                                     required
                                 />
@@ -273,7 +292,8 @@ const ContactClient: React.FC = () => {
                                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="relative"
-                            >                                <label className="flex items-center text-[#0f0104] font-semibold mb-2">
+                            >
+                                <label className="flex items-center text-[#0f0104] font-semibold mb-2">
                                     <Mail size={18} className="mr-2 text-[#5d0505]" />
                                     Email Address
                                     <span className="text-red-500 ml-1">*</span>
@@ -283,11 +303,10 @@ const ContactClient: React.FC = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light ${
-                                        errors.email 
-                                            ? 'border-red-500 focus:border-red-500' 
-                                            : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
-                                    }`}
+                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light ${errors.email
+                                        ? 'border-red-500 focus:border-red-500'
+                                        : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
+                                        }`}
                                     placeholder="Enter your email address"
                                     required
                                 />
@@ -307,7 +326,8 @@ const ContactClient: React.FC = () => {
                                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: 0.4 }}
                                 className="relative"
-                            >                                <label className="flex items-center text-[#0f0104] font-semibold mb-2">
+                            >
+                                <label className="flex items-center text-[#0f0104] font-semibold mb-2">
                                     <MessageSquare size={18} className="mr-2 text-[#5d0505]" />
                                     Message
                                     <span className="text-red-500 ml-1">*</span>
@@ -317,11 +337,10 @@ const ContactClient: React.FC = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={5}
-                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light resize-none ${
-                                        errors.message 
-                                            ? 'border-red-500 focus:border-red-500' 
-                                            : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
-                                    }`}
+                                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 bg-neutral-light resize-none ${errors.message
+                                        ? 'border-red-500 focus:border-red-500'
+                                        : 'border-[#5d0505]/30 focus:border-[#5d0505] hover:border-[#825a56]'
+                                        }`}
                                     placeholder="Write your message here..."
                                     required
                                 />
@@ -340,10 +359,10 @@ const ContactClient: React.FC = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: 0.5 }}
-                            >                                
-                            <button
+                            >
+                                <button
                                     type="submit"
-                                    disabled={loading}
+                                    disabled={loading || !isOnline}
                                     className="w-full bg-[#5d0505] text-white font-bold py-4 px-6 rounded-lg hover:bg-[#0f0104] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
                                 >
                                     {loading ? (
@@ -364,8 +383,7 @@ const ContactClient: React.FC = () => {
                             </motion.div>
                         </form>
                     </motion.div>
-                </div>
-            </div>
+                </div>            </div>
         </section>
     );
 };
