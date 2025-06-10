@@ -206,7 +206,8 @@ const ContactClient: React.FC = () => {
                                         <InstagramIcon />
                                     </a>
                                 </div>
-                            </div>                            {/* Quick Contact Button */}
+                            </div>                            
+                            {/* Quick Contact Button */}
                             <div className="mt-6 pt-4 border-t border-[#5d0505]/20">
                                 <button
                                     onClick={scrollToContactForm}

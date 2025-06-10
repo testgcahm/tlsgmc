@@ -33,7 +33,7 @@ export async function GET() {
     const eventsCol = collection(db, 'events');
     const eventsSnapshot = await getDocs(eventsCol);
     const eventsArray = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    
+
     // Always return a valid response, even if no events exist
     return NextResponse.json({ eventsArray: eventsArray || [] });
   } catch (error) {
@@ -51,15 +51,18 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     const docRef = await adminDb.collection('events').add(data);
-    
+
     // Always revalidate the main events page
     revalidatePath('/events');
-    
+
     // Only revalidate the specific event page if slug exists
     if (data.slug) {
       revalidatePath(`/events/${data.slug}`);
     }
-    
+
+    // Revalidate sitemap to include new event
+    revalidatePath('/sitemap.xml');
+
     return NextResponse.json({ success: true, id: docRef.id });
   } catch (error) {
     return NextResponse.json({ success: false, error: (error as Error).message }, { status: 400 });
@@ -73,10 +76,10 @@ export async function PUT(request: Request) {
   }
   try {
     const body = await request.json();
-    
+
     // Always revalidate the main events page
     revalidatePath('/events');
-    
+
     if (Array.isArray(body.order)) {
       const batch = adminDb.batch();
       body.order.forEach((item: { id: string, order: number }) => {
@@ -84,32 +87,33 @@ export async function PUT(request: Request) {
         batch.update(eventRef, { order: item.order });
       });
       await batch.commit();
-      
       // For reordering, we only need to revalidate the main events page which contains all events
       // No need to revalidate individual pages as only the order changed
-      
+
       return NextResponse.json({ success: true });
     } else {
       const { id, ...data } = body;
       if (!id) return NextResponse.json({ success: false, error: 'Missing event id' }, { status: 400 });
-      
+
       // Get the current event data to check if slug has changed
       const eventRef = adminDb.collection('events').doc(id);
       const eventDoc = await eventRef.get();
       const oldData = eventDoc.data();
-      
+
       await eventRef.update(data);
-      
+
       // If the event has a slug, revalidate its page
       if (data.slug) {
         revalidatePath(`/events/${data.slug}`);
       }
-      
       // If slug was changed, also revalidate the old slug page
       if (oldData?.slug && data.slug && oldData.slug !== data.slug) {
         revalidatePath(`/events/${oldData.slug}`);
       }
-      
+
+      // Revalidate sitemap when event is updated
+      revalidatePath('/sitemap.xml');
+
       return NextResponse.json({ success: true });
     }
   } catch (error) {
@@ -125,22 +129,24 @@ export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();
     if (!id) return NextResponse.json({ success: false, error: 'Missing event id' }, { status: 400 });
-    
+
     // Get the event data before deleting to get the slug
     const eventRef = adminDb.collection('events').doc(id);
     const eventDoc = await eventRef.get();
     const eventData = eventDoc.data();
-    
+
     // Revalidate the specific event page if slug exists before deleting
     if (eventData?.slug) {
       revalidatePath(`/events/${eventData.slug}`);
     }
-    
+
     await eventRef.delete();
-    
     // Always revalidate the main events page
     revalidatePath('/events');
-    
+
+    // Revalidate sitemap to remove deleted event
+    revalidatePath('/sitemap.xml');
+
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ success: false, error: (error as Error).message }, { status: 400 });
