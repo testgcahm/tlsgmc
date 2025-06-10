@@ -34,7 +34,7 @@ export default function ProfileDropdown({
     <div className="flex justify-end w-full p-4 relative">
       <button
         ref={buttonRef}
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-500 hover:bg-primary-600 text-white focus:outline-none"
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-accent hover:bg-accent-light text-white focus:outline-none"
         onClick={() => setShowDropdown(!showDropdown)}
         title="Profile"
       >

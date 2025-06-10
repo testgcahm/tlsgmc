@@ -65,7 +65,7 @@ const AboutClient = () => {
         ref={heroRef}
         className="relative overflow-hidden"
       >
-        <div className="bg-gradient-to-br from-[#0f0104] via-[#5d0505] to-[#825a56] min-h-[85vh] py-3 flex items-center justify-center px-4">
+        <div className="bg-gradient-to-br from-[#0f0104] to-[#5d0505] min-h-[85vh] py-3 flex items-center justify-center px-4">
           <div className={`max-w-6xl mx-auto text-center transform transition-all duration-1000 ${
             heroInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           }`}>

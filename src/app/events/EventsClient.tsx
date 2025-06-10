@@ -34,7 +34,7 @@ export default function EventsClient({ events }: EventsClientProps) {
         ref={heroRef}
         className="relative overflow-hidden"
       >
-        <div className="bg-gradient-to-br from-[#0f0104] via-[#5d0505] to-[#825a56] min-h-[50vh] py-16 flex items-center justify-center px-4">
+        <div className="bg-gradient-to-br from-[#0f0104] to-[#5d0505] min-h-[50vh] py-16 flex items-center justify-center px-4">
           <div className={`max-w-6xl mx-auto text-center transform transition-all duration-1000 ${heroInView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
             }`}>
             <div className="mb-8">
@@ -51,11 +51,19 @@ export default function EventsClient({ events }: EventsClientProps) {
             <div className="flex flex-wrap justify-center gap-8 text-white/80">
               <div className="flex items-center gap-2 text-lg">
                 <span className="w-2 h-2 rounded-full bg-[#825a56]"></span>
-                Mushaira Nights
+                Annual Mushairah
               </div>
               <div className="flex items-center gap-2 text-lg">
                 <span className="w-2 h-2 rounded-full bg-[#825a56]"></span>
-                Intercollegiate events
+                Intercollegiate Lierary Competition
+              </div>
+              <div className="flex items-center gap-2 text-lg">
+                <span className="w-2 h-2 rounded-full bg-[#825a56]"></span>
+                Open Mic
+              </div>
+              <div className="flex items-center gap-2 text-lg">
+                <span className="w-2 h-2 rounded-full bg-[#825a56]"></span>
+                Talk show
               </div>
             </div>
           </div>
@@ -65,7 +73,7 @@ export default function EventsClient({ events }: EventsClientProps) {
       {/* Events Section */}
       <section
         ref={eventsRef}
-        className="py-20 px-4 bg-gradient-to-br from-[#f8f4f0] to-[#e8e0d8]"
+        className="py-20 px-4 max-[650px]:px-2 bg-gradient-to-br from-[#f8f4f0] to-[#e8e0d8]"
       >
         <div className="max-w-7xl mx-auto">
           {sortedEvents.length === 0 ? (
@@ -114,13 +122,10 @@ export default function EventsClient({ events }: EventsClientProps) {
                     }}
                     className="relative"
                   >
-                    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border-2 border-[#825a56]/10 hover:border-[#5d0505]/30 transition-all duration-300 hover:shadow-3xl hover:scale-[1.02] transform">
+                    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-2 max-[650px]:px-1 shadow-2xl border-2 border-[#5d0505]/30 transition-all duration-300 transform">
                       <EventCard event={event} />
                     </div>
 
-                    {/* Decorative elements */}
-                    <div className="absolute -top-2 -left-2 w-6 h-6 bg-gradient-to-br from-[#5d0505] to-[#825a56] rounded-full opacity-60"></div>
-                    <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-gradient-to-br from-[#825a56] to-[#5d0505] rounded-full opacity-40"></div>
                   </motion.div>
                 ))}
               </div>

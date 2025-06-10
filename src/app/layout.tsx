@@ -15,6 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="manifest" href="/manifest.webmanifest" />
+      </head>
       <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
         <Analytics />
         <SpeedInsights />

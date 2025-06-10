@@ -23,9 +23,10 @@ export default function NotificationPopup() {
     <>
       {enlarged && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80" onClick={() => setEnlarged(false)}>
-          <img
+          <Image
             src="/delay.jpg"
             alt="Event Postponed"
+            sizes="fill"
             className="max-w-[90vw] max-h-[90vh] rounded-xl shadow-2xl border-4 border-white"
             onClick={e => e.stopPropagation()}
           />

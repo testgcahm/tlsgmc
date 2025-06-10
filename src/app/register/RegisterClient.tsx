@@ -188,15 +188,15 @@ const RegisterClient: React.FC = () => {
                         animate={welcomeInView ? { x: 0, opacity: 1 } : {}}
                         transition={{ duration: 0.7, ease: "easeOut" }}
                         className="bg-white rounded-xl shadow-lg border-l-4 border-secondary max-[400px]:p-4 max-[320px]:p-2 p-8 flex flex-col items-center text-center first-block-text"
-                    >                        <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-3 drop-shadow-sm">Welcome to Literary Fiesta'2025</h2>
+                    >                        <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-3 drop-shadow-sm">Welcome to Takhayul Literary Society Event</h2>
                         <p className="text-lg text-gray-700 mb-4 font-medium">An inspiring event dedicated to literature, creative writing, and intellectual discourse for the GMC community and beyond.</p>
                         <div className="my-2">
-                            <span className="inline-block bg-secondary text-primary-900 font-semibold px-4 py-1 rounded-full text-base mb-2">May 7th, 2025 &middot; GMCTH Auditorium</span>
+                            {/* <span className="inline-block bg-secondary text-primary-900 font-semibold px-4 py-1 rounded-full text-base mb-2">May 7th, 2025 &middot; GMCTH Auditorium</span> */}
                         </div>
                         <p className="text-base text-primary-700 mb-2">Engage with renowned speakers, connect with peers, and be part of a memorable experience.</p>
                     </motion.div>
 
-                    {/* Payment section with fade-in-up animation */}
+                    Payment section with fade-in-up animation
                     <motion.div
                         ref={paymentRef}
                         initial={{ y: 50, opacity: 0, scale: 0.9 }}
