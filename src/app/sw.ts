@@ -1,6 +1,6 @@
-import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { CacheFirst, NetworkOnly, Serwist } from "serwist";
+import { CacheFirst, ExpirationPlugin, NetworkOnly, Serwist } from "serwist";
+import { getDefaultCache } from 'serwistcache'
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -12,6 +12,8 @@ declare global {
   }
 }
 
+const newCache = getDefaultCache();
+
 declare const self: ServiceWorkerGlobalScope;
 
 const serwist = new Serwist({
@@ -20,16 +22,26 @@ const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: [
-      ...defaultCache,
-      {
-        matcher: ({ url }) => url.pathname.endsWith('/logo.png') || url.pathname.endsWith('/logo-144.png'),
-        handler: new CacheFirst(),
-      },
-      {
-        matcher: ({ url }) => url.pathname === "/api",
-        handler: new NetworkOnly(),
-      },
-    ],
+    {
+      matcher: ({ url }) => url.pathname.endsWith('/logo.png') || url.pathname.endsWith('/logo-144.png'),
+      handler: new CacheFirst(
+        {
+          cacheName: 'logo-cache',
+          plugins: [
+            new ExpirationPlugin({
+              maxEntries: 10,
+              maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+            }),
+          ],
+        }
+      ),
+    },
+    {
+      matcher: ({ url }) => url.pathname === "/api",
+      handler: new NetworkOnly(),
+    },
+    ...newCache,
+  ],
 });
 
 serwist.addEventListeners();
