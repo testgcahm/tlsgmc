@@ -23,21 +23,23 @@ const serwist = new Serwist({
   navigationPreload: true,
   runtimeCaching: [
     {
-      matcher: ({ url }) => url.pathname.endsWith('/logo.png') || url.pathname.endsWith('/logo-144.png'),
-      handler: new CacheFirst(
-        {
-          cacheName: 'logo-cache',
-          plugins: [
-            new ExpirationPlugin({
-              maxEntries: 10,
-              maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-            }),
-          ],
-        }
-      ),
+      matcher: ({ url }) => {
+        const publicAsset = url.pathname.match(/^\/(logo|background|cabinet|delay|og|robots|googled[\w]+)\.(ico|png|jpg|jpeg|txt|html)$/);
+        const genericPublicAsset = url.pathname.match(/^\/[\w-]+\.(ico|png|jpg|jpeg|txt|html)$/);
+        return publicAsset || genericPublicAsset;
+      },
+      handler: new CacheFirst({
+        cacheName: 'public-assets-cache',
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 20,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+          }),
+        ],
+      }),
     },
     {
-      matcher: ({ url }) => url.pathname === "/api",
+      matcher: ({ url }) => url.pathname === "/api/",
       handler: new NetworkOnly(),
     },
     ...newCache,
