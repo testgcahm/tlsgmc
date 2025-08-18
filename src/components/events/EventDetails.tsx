@@ -271,24 +271,24 @@ const EventDetails = ({ event }: EventDetailsProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/95 backdrop-blur-lg"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/95 backdrop-blur-lg overflow-auto p-4"
           onClick={() => setEnlargedImage(null)}
         >          <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="relative max-w-[95vw] max-h-[95vh]"
+            className="relative"
             onClick={e => e.stopPropagation()}
           >            <Image
               src={enlargedImage}
               alt="Enlarged preview"
               width={800}
               height={600}
-              className="max-w-full max-h-full rounded-2xl shadow-2xl border-4 border-white/20 object-contain"
+              className="w-auto h-auto max-w-[95vw] max-h-[90vh] rounded-2xl shadow-2xl border-4 border-white/20 object-contain"
               priority
             />
             <button
-              className="absolute -top-4 -right-4 bg-white/90 backdrop-blur-sm text-secondary text-2xl font-bold rounded-full w-12 h-12 flex items-center justify-center hover:bg-white transition-colors shadow-lg"
+              className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-secondary text-2xl font-bold rounded-full w-10 h-10 flex items-center justify-center hover:bg-white transition-colors shadow-lg"
               onClick={() => setEnlargedImage(null)}
               aria-label="Close image preview"
             >
