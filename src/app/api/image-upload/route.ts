@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { google } from 'googleapis';
 import { Readable } from 'stream';
 import { FolderType } from '@/types/googleDrive';
 import { revalidatePath } from 'next/cache';
+import { getDriveClient } from '@/lib/googleDriveOAuth';
 
 function errorResponse(error: string, status = 500, details?: unknown) {
     console.error(error, details ?? '');
@@ -31,22 +31,17 @@ export async function POST(req: NextRequest) {
             return errorResponse('File too large (max 250KB)', 400);
         }
 
-        // Google Drive Auth with Service Account from ENV
-        const serviceAccountJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
-        if (!serviceAccountJson) {
-            return errorResponse('Google service account credentials not set in environment', 500);
-        }
-        let credentials;
+        // Use OAuth Drive client (owner-approved)
+        let drive;
         try {
-            credentials = JSON.parse(serviceAccountJson);
-        } catch (err: unknown) {
-            return errorResponse('Invalid GOOGLE_SERVICE_ACCOUNT_JSON format', 500, err);
+            const origin = new URL(req.url).origin;
+            drive = await getDriveClient(origin);
+        } catch (err: any) {
+            if (err && err.code === 'NO_TOKENS') {
+                return errorResponse(`Google Drive not connected. Visit ${err.connectUrl}`, 503);
+            }
+            return errorResponse('Google Drive auth failed', 500, err);
         }
-        const auth = new google.auth.GoogleAuth({
-            credentials,
-            scopes: ['https://www.googleapis.com/auth/drive'],
-        });
-        const drive = google.drive({ version: 'v3', auth });
 
         const folderType = formData.get('folderType');
         let folderId: string | undefined;

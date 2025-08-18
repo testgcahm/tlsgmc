@@ -1,26 +1,16 @@
-import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
+import { getDriveClient } from '@/lib/googleDriveOAuth';
 
 export async function GET() {
   try {
-    // Only use credentials from environment variable, never from seed
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-      console.error('GOOGLE_SERVICE_ACCOUNT_JSON is missing');
-      return NextResponse.json({ success: false, error: 'Google service account credentials not set in environment' }, { status: 500 });
-    }
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    const auth = new google.auth.GoogleAuth({
-      credentials,
-      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-    });
-    const drive = google.drive({ version: 'v3', auth });
+  const drive = await getDriveClient();
     // TODO: Replace with your actual folder ID
     const folderId = process.env.GOOGLE_DRIVE_FOLDER_EVENTS_ID || '';
     if (!folderId) {
       console.error('GOOGLE_DRIVE_IMAGES_FOLDER_ID is missing');
       return NextResponse.json({ success: false, error: 'Google Drive folder ID not set in environment' }, { status: 500 });
     }
-    const res = await drive.files.list({
+  const res = await drive.files.list({
       q: `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`,
       // Include size field to get file sizes
       fields: 'files(id, name, mimeType, size)',
@@ -45,8 +35,11 @@ export async function GET() {
     });
     
     return NextResponse.json({ success: true, images });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in /api/drive-images:', error);
+    if (error && error.code === 'NO_TOKENS') {
+      return NextResponse.json({ success: false, error: 'Google Drive not connected', needConnect: true, connectUrl: error.connectUrl }, { status: 503 });
+    }
     const message = error instanceof Error ? error.message : 'Failed to fetch images';
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
