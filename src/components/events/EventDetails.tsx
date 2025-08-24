@@ -107,7 +107,7 @@ const EventInfoCard = ({ event, sanitize }: { event: EventData; sanitize: (input
         <span className="text-xl max-[600px]:text-lg max-[475px]:text-base font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent break-normal">Activities</span>
       </div>
       <div className="bg-gradient-to-br from-neutral-light to-white border border-neutral-dark/20 rounded-xl p-3 max-[475px]:p-2 shadow-inner">
-        <div className="text-primary-light max-[600px]:text-sm max-[475px]:text-xs leading-relaxed break-normal" dangerouslySetInnerHTML={{ __html: sanitize(event.activities.replace(/\\n/g, '<br />')) }} />
+        <div className="text-primary-light max-[600px]:text-sm max-[500px]:text-sm leading-relaxed break-normal whitespace-pre-line" dangerouslySetInnerHTML={{ __html: sanitize(event.activities.replace(/\n/g, '<br />')) }} />
       </div>
     </motion.div><motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -123,7 +123,7 @@ const EventInfoCard = ({ event, sanitize }: { event: EventData; sanitize: (input
         <span className="text-xl max-[600px]:text-lg max-[475px]:text-base font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent break-normal">Description</span>
       </div>
       <div className="bg-gradient-to-br from-neutral-light to-white border border-neutral-dark/20 rounded-xl p-3 max-[475px]:p-2 shadow-inner">
-        <div className="text-primary-light max-[600px]:text-sm max-[475px]:text-xs leading-relaxed break-normal" dangerouslySetInnerHTML={{ __html: sanitize(event.description.replace(/\\n/g, '<br />')) }} />
+        <div className="text-primary-light max-[600px]:text-sm max-[500px]:text-sm leading-relaxed break-normal whitespace-pre-line" dangerouslySetInnerHTML={{ __html: sanitize(event.description.replace(/\n/g, '<br />')) }} />
       </div>
     </motion.div>
   </div>
@@ -184,7 +184,7 @@ const EventSegments = ({ subevents, sanitize, setEnlargedImage }: {
               </h4>
               {sub.description && (
                 <div className="bg-gradient-to-br from-neutral to-neutral-light rounded-xl p-3 max-[475px]:p-2 border border-neutral-dark/20">
-                  <div className="text-primary-light max-[600px]:text-sm max-[475px]:text-xs break-normal leading-relaxed" dangerouslySetInnerHTML={{ __html: sanitize(sub.description.replace(/\\n/g, '<br />')) }} />
+                  <div className="text-primary-light max-[600px]:text-sm max-[500px]:text-sm break-normal leading-relaxed whitespace-pre-line" dangerouslySetInnerHTML={{ __html: sanitize(sub.description.replace(/\n/g, '<br />')) }} />
                 </div>
               )}
             </div>
@@ -201,8 +201,8 @@ const EventSegments = ({ subevents, sanitize, setEnlargedImage }: {
               </div>
               <div className="space-y-2 max-[475px]:space-y-1">{sub.speakers.map((sp: any, i: number) => (
                 <div key={i} className="bg-gradient-to-r from-neutral to-neutral-light p-2 max-[475px]:p-1.5 rounded-lg border border-neutral-dark/20">
-                  <span className="font-bold max-[600px]:text-sm max-[475px]:text-xs text-primary block break-normal">{sp.name}</span>
-                  {sp.bio && <span className="text-sm max-[600px]:text-xs max-[475px]:text-xs text-primary-light mt-1 block break-normal">{sp.bio}</span>}
+                  <span className="font-bold max-[600px]:text-sm max-[500px]:text-sm text-primary block break-normal">{sp.name}</span>
+                  {sp.bio && <span className="text-sm max-[600px]:text-xs max-[500px]:text-sm text-primary-light mt-1 block break-normal">{sp.bio}</span>}
                 </div>
               ))}
               </div>
@@ -241,9 +241,9 @@ const SpeakersSection = ({ speakers }: { speakers: any[] }) => (
               </svg>
             </div>
             <div className="flex-1">
-              <h4 className="font-bold text-primary text-lg max-[600px]:text-base max-[475px]:text-sm mb-1 max-[475px]:mb-0 break-normal">{speaker.name}</h4>
+              <h4 className="font-bold text-primary text-lg max-[600px]:text-base max-[500px]:text-base mb-1 max-[475px]:mb-0 break-normal">{speaker.name}</h4>
               {speaker.bio && (
-                <p className="text-primary-light max-[600px]:text-sm max-[475px]:text-xs leading-relaxed break-normal">{speaker.bio}</p>
+                <p className="text-primary-light max-[600px]:text-sm max-[500px]:text-sm leading-relaxed break-normal">{speaker.bio}</p>
               )}
             </div>
           </div>
